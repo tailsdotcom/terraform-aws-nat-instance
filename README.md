@@ -35,7 +35,7 @@ module "vpc" {
 }
 
 module "nat" {
-  source = "int128/nat-instance/aws"
+  source = "github.com/TableCheck-Labs/terraform-aws-nat-instance"
 
   name                        = "main"
   vpc_id                      = module.vpc.vpc_id
