@@ -17,7 +17,7 @@ sysctl -q -w net.ipv4.conf.eth1.send_redirects=0
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 # wait for network connection
-curl --retry 10 http://www.example.com
+curl --retry 10 http://www.google.com
 
 # reestablish connections
 systemctl restart amazon-ssm-agent.service
