@@ -171,6 +171,7 @@ No requirements.
 | enabled | Enable or disable the NAT instance. | `bool` | `true` | no |
 | image\_id | AMI of the NAT instance. Defaults to the latest Amazon Linux 2. | `string` | `""` | no |
 | instance\_types | Candidates of spot instance type for the NAT instance. This is used in the mixed instances policy. | `list` | <pre>[<br>  "t3.nano",<br>  "t3a.nano"<br>]</pre> | no |
+| instance\_architecture | The CPU architecture of the instances specified in instance_types. Use arm64 for Graviton types. | `string` | `x86_64` | no |
 | key\_name | Name of the key pair for the NAT instance. You can set this to assign the key pair to the NAT instance. | `string` | `""` | no |
 | name | Name for all the resources as identifier. | `string` | n/a | yes |
 | private\_route\_table\_ids | List of ID of the route tables for the private subnets. You can set this to assign each subnet's default route to the NAT instance. | `list` | `[]` | no |
