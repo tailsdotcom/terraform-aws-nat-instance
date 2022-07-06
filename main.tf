@@ -60,7 +60,7 @@ data "aws_ami" "this" {
   }
   filter {
     name   = "block-device-mapping.volume-type"
-    values = ["gp3"]
+    values = ["gp2"]
   }
 }
 
@@ -77,6 +77,15 @@ resource "aws_launch_template" "this" {
     associate_public_ip_address = true
     security_groups             = [aws_security_group.this.id]
     delete_on_termination       = true
+  }
+
+  block_device_mappings {
+    device_name = tolist(data.aws_ami.this.block_device_mappings)[0].device_name
+    ebs {
+      snapshot_id = tolist(data.aws_ami.this.block_device_mappings)[0].ebs.snapshot_id
+      volume_size = tolist(data.aws_ami.this.block_device_mappings)[0].ebs.volume_size
+      volume_type = "gp3"
+    }
   }
 
   tag_specifications {
