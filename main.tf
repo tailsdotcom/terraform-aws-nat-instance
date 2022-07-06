@@ -75,6 +75,15 @@ resource "aws_launch_template" "this" {
     delete_on_termination       = true
   }
 
+  block_device_mappings {
+    device_name = tolist(data.aws_ami.this.block_device_mappings)[0].device_name
+    ebs {
+      snapshot_id = tolist(data.aws_ami.this.block_device_mappings)[0].ebs.snapshot_id
+      volume_size = tolist(data.aws_ami.this.block_device_mappings)[0].ebs.volume_size
+      volume_type = "gp3"
+    }
+  }
+
   tag_specifications {
     resource_type = "instance"
     tags          = local.common_tags
