@@ -78,6 +78,12 @@ variable "user_data_runcmd" {
   default     = []
 }
 
+variable "associate_public_ip_address" {
+  description = "Whether to associated a public IP with the instance. Set to false if separately using an EIP."
+  type        = bool
+  default     = true
+}
+
 locals {
   // Merge the default tags and user-specified tags.
   // User-specified tags take precedence over the default.
