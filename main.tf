@@ -58,10 +58,6 @@ data "aws_ami" "this" {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-  filter {
-    name   = "block-device-mapping.volume-type"
-    values = ["gp2"]
-  }
 }
 
 resource "aws_launch_template" "this" {
