@@ -17,6 +17,7 @@ Terraform 0.12 or later is required.
 
 **Warning**: Generally you should use a NAT gateway. This module provides a very low cost solution for testing purpose.
 
+![image](https://user-images.githubusercontent.com/4584443/188473317-e88b3b5d-9604-45f1-9227-3aa9e34b892c.png)
 
 ## Getting Started
 
