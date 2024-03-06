@@ -75,6 +75,10 @@ resource "aws_launch_template" "this" {
     delete_on_termination       = true
   }
 
+  metadata_options {
+    http_tokens = "required"
+  }
+
   block_device_mappings {
     device_name = tolist(data.aws_ami.this.block_device_mappings)[0].device_name
     ebs {
