@@ -1,5 +1,8 @@
 #!/bin/bash -x
 
+# Install missing packages
+yum update -y
+yum install -y iptables iproute
 
 aws ec2 modify-instance-attribute --no-source-dest-check \
   --region "$(ec2-metadata --quiet -R)" \
