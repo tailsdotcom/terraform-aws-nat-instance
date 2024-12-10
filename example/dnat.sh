@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-region="$(/opt/aws/bin/ec2-metadata -z  | sed 's/placement: \(.*\).$/\1/')"
+region="$(ec2-metadata --quiet -R)"
 eth1_addr="$(ip -f inet -o addr show dev eth1 | cut -d' ' -f 7 | cut -d/ -f 1)"
 
 function get_instance_private_ip_by_name() {
