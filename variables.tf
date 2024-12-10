@@ -31,7 +31,7 @@ variable "private_route_table_ids" {
 }
 
 variable "image_id" {
-  description = "AMI of the NAT instance. Default to the latest Amazon Linux 2"
+  description = "AMI of the NAT instance. Default to the latest Amazon Linux 2023"
   type        = string
   default     = ""
 }
