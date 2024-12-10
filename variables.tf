@@ -43,9 +43,9 @@ variable "instance_types" {
 }
 
 variable "instance_architecture" {
-  description = "The CPU architecture of the instances specified in instance_types. Use arm64 for Graviton types."
+  description = "The CPU architecture of the instances specified in instance_types. Use x86_64 for x86 types."
   type        = string
-  default     = "x86_64"
+  default     = "arm64"
 }
 
 variable "use_spot_instance" {

@@ -38,25 +38,16 @@ resource "aws_route" "this" {
   network_interface_id   = aws_network_interface.this.id
 }
 
-# AMI of the latest Amazon Linux 2 
+# AMI of the latest Amazon Linux 2023
+data "aws_ssm_parameter" "ami" {
+  name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-${var.instance_architecture}"
+}
+
 data "aws_ami" "this" {
-  most_recent = true
-  owners      = ["amazon"]
+  owners = ["amazon"]
   filter {
-    name   = "architecture"
-    values = [var.instance_architecture]
-  }
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-*"]
-  }
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
+    name   = "image-id"
+    values = [data.aws_ssm_parameter.ami.value]
   }
 }
 
