@@ -2,7 +2,7 @@
 
 # Install missing packages
 yum update -y
-yum install -y iptables iproute
+yum install -y iptables-services
 
 aws ec2 modify-instance-attribute --no-source-dest-check \
   --region "$(ec2-metadata --quiet -R)" \
