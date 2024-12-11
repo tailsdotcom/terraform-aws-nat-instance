@@ -25,9 +25,18 @@ systemctl enable iptables
 service iptables save
 
 # Switch the default route to ETH1
-mkdir -p /etc/systemd/network/60-${ETH1}.network.d
-cp /run/systemd/network/70-${ETH1}.network.d/eni.conf /etc/systemd/network/60-${ETH1}.network.d/
-sed -i 's/RouteMetric=513/RouteMetric=500/g' /etc/systemd/network/60-${ETH1}.network.d/eni.conf
+mkdir -p /etc/systemd/network/70-${ETH1}.network.d
+
+cat > /etc/systemd/network/70-${ETH1}.network.d/routepriority.conf << EOF
+[Match]
+Name=ens6
+
+[DHCPv4]
+RouteMetric=500
+
+[IPv6AcceptRA]
+RouteMetric=500
+EOF
 networkctl reload
 
 # Wait for network connection
