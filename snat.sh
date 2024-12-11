@@ -24,8 +24,11 @@ iptables -t nat -A POSTROUTING -o $ETH1 -j MASQUERADE
 systemctl enable iptables
 service iptables save
 
-# Wwitch the default route to ETH1
-ip route del default dev ${ETH0}
+# Switch the default route to ETH1
+mkdir -p /etc/systemd/network/60-${ETH1}.network.d
+cp /run/systemd/network/70-${ETH1}.network.d/eni.conf /etc/systemd/network/60-${ETH1}.network.d/
+sed -i 's/RouteMetric=513/RouteMetric=500/g' /etc/systemd/network/60-${ETH1}.network.d/eni.conf
+networkctl reload
 
 # Wait for network connection
 curl --retry 10 http://www.google.com
