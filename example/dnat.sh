@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
-region="$(/opt/aws/bin/ec2-metadata -z  | sed 's/placement: \(.*\).$/\1/')"
-eth1_addr="$(ip -f inet -o addr show dev eth1 | cut -d' ' -f 7 | cut -d/ -f 1)"
+region="$(ec2-metadata --quiet -R)"
+ens6_addr="$(ip -f inet -o addr show dev ens6 | cut -d' ' -f 7 | cut -d/ -f 1)"
 
 function get_instance_private_ip_by_name() {
   local name="$1"
@@ -14,7 +14,7 @@ function get_instance_private_ip_by_name() {
 function run_iptables() {
   local action="$1"
   iptables -t nat "$action" PREROUTING 1 -m tcp -p tcp \
-    --dst "$eth1_addr" --dport 80 \
+    --dst "$ens6_addr" --dport 80 \
     -j DNAT --to-destination "$(get_instance_private_ip_by_name ${ec2_name}):80"
 }
 

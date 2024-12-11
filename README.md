@@ -76,14 +76,14 @@ Take a look at the diagram:
 
 ![diagram](diagram.svg)
 
-By default the latest Amazon Linux 2 image is used.
+By default the latest Amazon Linux 2023 image is used.
 You can set `image_id` for a custom image.
 
 The instance will execute [`runonce.sh`](runonce.sh) and [`snat.sh`](snat.sh) to enable NAT as follows:
 
-1. Attach the ENI to `eth1`.
+1. Attach the ENI to `ens6`.
 1. Set the kernel parameters for IP forwarding and masquerade.
-1. Switch the default route to `eth1`.
+1. Switch the default route to `ens6`.
 
 
 ## Configuration
@@ -169,7 +169,7 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | enabled | Enable or disable the NAT instance. | `bool` | `true` | no |
-| image\_id | AMI of the NAT instance. Defaults to the latest Amazon Linux 2. | `string` | `""` | no |
+| image\_id | AMI of the NAT instance. Defaults to the latest Amazon Linux 2023. | `string` | `""` | no |
 | instance\_types | Candidates of spot instance type for the NAT instance. This is used in the mixed instances policy. | `list` | <pre>[<br>  "t3.nano",<br>  "t3a.nano"<br>]</pre> | no |
 | instance\_architecture | The CPU architecture of the instances specified in instance_types. Use arm64 for Graviton types. | `string` | `x86_64` | no |
 | key\_name | Name of the key pair for the NAT instance. You can set this to assign the key pair to the NAT instance. | `string` | `""` | no |
